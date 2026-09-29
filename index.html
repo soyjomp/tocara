@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2e1065">
+    <title>Tocará.com - Tu App de Euromillón</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL TIPO APP -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="logo-title"><i class="fa-solid fa-hat-wizard"></i> Tocará<span>.com</span></h1>
+            <p class="hero-subtitle">Nuestros duendes fabrican combinaciones con mágia.</p>
+        </div>
+    </header>
+
+    <main class="container main-grid">
+        
+        <!-- SECCIÓN 1: EL LABORATORIO DE LOS DUENDES (GENERADOR AUTOMÁTICO / MANUAL) -->
+        <section class="card generator-hero full-width">
+            <h2><i class="fa-solid fa-wand-magic-sparkles"></i> El Laboratorio de los Duendes</h2>
+            <p>Genera una apuesta al azar o introduce tus números manualmente para analizarlos al momento.</p>
+            
+            <!-- PESTAÑAS DE MODO -->
+            <div class="generator-tabs">
+                <button class="tab-btn active" id="tabAuto"><i class="fa-solid fa-shuffle"></i> Magia Al Azar</button>
+                <button class="tab-btn" id="tabManual"><i class="fa-solid fa-pen-nib"></i> Meter a Mano</button>
+            </div>
+
+            <!-- PANEL AUTOMÁTICO -->
+            <div class="gen-panel" id="panelAuto">
+                <button id="btnGenerate" class="btn glow-btn"><i class="fa-solid fa-bolt"></i> ¡Generar Combinación Mágica!</button>
+            </div>
+
+            <!-- PANEL MANUAL -->
+            <div class="gen-panel" id="panelManual" style="display: none;">
+                <p class="panel-instruction">Introduce 5 números (1-50) y 2 estrellas (1-12):</p>
+                <div class="manual-build-container">
+                    <div class="manual-inputs-group">
+                        <input type="number" min="1" max="50" class="custom-num" placeholder="N1">
+                        <input type="number" min="1" max="50" class="custom-num" placeholder="N2">
+                        <input type="number" min="1" max="50" class="custom-num" placeholder="N3">
+                        <input type="number" min="1" max="50" class="custom-num" placeholder="N4">
+                        <input type="number" min="1" max="50" class="custom-num" placeholder="N5">
+                    </div>
+                    <div class="manual-stars-group">
+                        <input type="number" min="1" max="12" class="custom-star" placeholder="E1">
+                        <input type="number" min="1" max="12" class="custom-star" placeholder="E2">
+                    </div>
+                </div>
+                <button id="btnApplyManual" class="btn secondary full-btn" style="margin-top: 12px;"><i class="fa-solid fa-check"></i> Cargar y Analizar Combinación</button>
+            </div>
+
+            <!-- VISOR DE LA COMBINACIÓN -->
+            <div class="ticket-display-large" id="ticketDisplay">
+                <div class="numbers-row" id="generatedNumbers">
+                    <span class="ball placeholder">?</span>
+                    <span class="ball placeholder">?</span>
+                    <span class="ball placeholder">?</span>
+                    <span class="ball placeholder">?</span>
+                    <span class="ball placeholder">?</span>
+                </div>
+                <div class="stars-row" id="generatedStars">
+                    <span class="star placeholder">?</span>
+                    <span class="star placeholder">?</span>
+                </div>
+            </div>
+
+            <div id="generatedAnalysisBox" class="stats-box analysis-highlight" style="display:none;">
+                <!-- Análisis con últimos 10 sorteos -->
+            </div>
+
+            <div class="generator-actions-sub">
+                <button id="btnSaveTicket" class="btn primary full-btn"><i class="fa-solid fa-bookmark"></i> Guardar en mis apuestas</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: REGISTRO Y CONTABILIDAD DE JUGADAS (APP STYLE) -->
+        <section class="card finance-section full-width">
+            <h2><i class="fa-solid fa-piggy-bank"></i> Apuntar Jugada y Control de Gastos</h2>
+            <p>Registra las apuestas que juegas esta semana, selecciona lo que te ha costado y calcula tu premio.</p>
+            
+            <div class="finance-card-builder">
+                
+                <!-- FECHA Y SELECTOR DE APUESTA -->
+                <div class="form-row-app">
+                    <div class="form-field">
+                        <label><i class="fa-solid fa-calendar"></i> Fecha del Sorteo:</label>
+                        <input type="date" id="playDate" class="app-input">
+                    </div>
+
+                    <div class="form-field">
+                        <label><i class="fa-solid fa-ticket"></i> Apuesta Utilizada:</label>
+                        <select id="playBetSelect" class="app-select">
+                            <!-- Rellenado por JS -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- CAMPO TEXTO SI ES PEÑA U OTRA -->
+                <div class="form-field" id="customBetNameContainer" style="display: none; margin-top: 10px;">
+                    <label><i class="fa-solid fa-pen"></i> Nombre/Descripción de la Peña o Apuesta:</label>
+                    <input type="text" id="playBetCustom" placeholder="Ej. Peña del Trabajo / Múltiple 6 nºs" class="app-input">
+                </div>
+
+                <!-- SELECTOR DE COSTE (BOTONES PRESET) -->
+                <div class="cost-preset-section">
+                    <label><i class="fa-solid fa-euro-sign"></i> Importe invertido:</label>
+                    <div class="preset-buttons-row">
+                        <button type="button" class="cost-btn active" data-cost="2.50"><i class="fa-solid fa-tag"></i> 1 Día (2,50 €)</button>
+                        <button type="button" class="cost-btn" data-cost="5.00"><i class="fa-solid fa-tags"></i> 2 Días (5,00 €)</button>
+                        <button type="button" class="cost-btn" data-cost="custom"><i class="fa-solid fa-users"></i> Peña / Otro</button>
+                    </div>
+                    <div class="custom-cost-input-wrap" id="customCostWrap" style="display: none; margin-top: 10px;">
+                        <input type="number" id="playSpent" placeholder="Introduce importe (€)" step="0.50" min="0" value="2.50" class="app-input">
+                    </div>
+                </div>
+
+                <!-- PREMIO OBTENIDO -->
+                <div class="form-field" style="margin-top: 15px;">
+                    <label><i class="fa-solid fa-trophy"></i> Premio Ganado (€):</label>
+                    <input type="number" id="playWon" placeholder="0.00" step="0.50" min="0" value="0.00" class="app-input highlight-input">
+                </div>
+
+                <button id="btnAddPlayRecord" class="btn primary full-btn" style="margin-top: 18px;"><i class="fa-solid fa-plus-circle"></i> Apuntar esta Jugada</button>
+            </div>
+
+            <!-- RESUMEN ECONÓMICO TOTAL -->
+            <div class="finance-summary-grid">
+                <div class="stat-card">
+                    <h3>💸 Total Invertido</h3>
+                    <p class="stat-highlight spent-color" id="totalSpent">0.00 €</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🏆 Total Premios</h3>
+                    <p class="stat-highlight won-color" id="totalWon">0.00 €</p>
+                </div>
+                <div class="stat-card">
+                    <h3>⚖️ Balance Neto</h3>
+                    <p class="stat-highlight" id="totalNet">0.00 €</p>
+                </div>
+            </div>
+
+            <!-- LISTADO TARJETAS DE JUGADAS (OPTIMIZADO PARA MÓVIL) -->
+            <div class="records-header">
+                <h3><i class="fa-solid fa-list-check"></i> Historial de Jugadas Registradas</h3>
+            </div>
+            <div id="financeRecordsList" class="records-app-list">
+                <p class="empty-msg">No has registrado jugadas todavía. ¡Apunta tu primera apuesta!</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: APUESTA FIJA SEMANAL -->
+        <section class="card lucky-number-section">
+            <h2><i class="fa-solid fa-bullseye"></i> Tu Amuleto Fijo Semanal</h2>
+            <p>Tu combinación habitual para comprobar su racha en los últimos sorteos.</p>
+            
+            <div class="fixed-inputs-row">
+                <div class="input-group-mini">
+                    <label>Números (1-50):</label>
+                    <div class="inputs-container" id="fixedNumsInputs">
+                        <input type="number" min="1" max="50" value="6" class="f-num">
+                        <input type="number" min="1" max="50" value="9" class="f-num">
+                        <input type="number" min="1" max="50" value="23" class="f-num">
+                        <input type="number" min="1" max="50" value="25" class="f-num">
+                        <input type="number" min="1" max="50" value="50" class="f-num">
+                    </div>
+                </div>
+                <div class="input-group-mini">
+                    <label>Estrellas (1-12):</label>
+                    <div class="inputs-container" id="fixedStarsInputs">
+                        <input type="number" min="1" max="12" value="3" class="f-star">
+                        <input type="number" min="1" max="12" value="9" class="f-star">
+                    </div>
+                </div>
+            </div>
+            <button id="btnAnalyzeFixed" class="btn secondary full-btn" style="margin-top: 15px;"><i class="fa-solid fa-chart-line"></i> Examinar Amuleto Fijo</button>
+            
+            <div id="fixedAnalysisResult" class="stats-box" style="margin-top: 15px;">
+                <!-- Rellenado por JS -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: ÚLTIMOS 10 SORTEOS OFICIALES -->
+        <section class="card history-section">
+            <h2><i class="fa-solid fa-history"></i> Lo que ha caído últimamente</h2>
+            <p>Últimos 10 sorteos de referencia para contrastar combinaciones.</p>
+            <div class="table-responsive">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Combinación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="last10TableBody">
+                        <!-- Rellenado por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: APUESTAS GUARDADAS & GESTIÓN JSON -->
+        <section class="card saved-section full-width">
+            <div class="section-header-flex">
+                <h2><i class="fa-solid fa-vault"></i> Tus Apuestas Guardadas</h2>
+                <div class="json-buttons">
+                    <button id="btnExportJson" class="btn json-btn"><i class="fa-solid fa-download"></i> JSON</button>
+                    <label for="importJsonFile" class="btn json-btn file-label"><i class="fa-solid fa-upload"></i> Subir JSON</label>
+                    <input type="file" id="importJsonFile" accept=".json" style="display: none;">
+                </div>
+            </div>
+            <p>Guarda tus apuestas para usarlas en el registro o compártelas en formato JSON.</p>
+            
+            <div id="savedTicketsList" class="saved-list" style="margin-top: 15px;">
+                <p class="empty-msg">No hay tesoros guardados todavía.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>web creada By JOMP - 2026 © 2026  - Herramienta mágica avanzada de generación de Euromillones.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

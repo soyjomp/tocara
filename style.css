@@ -1,0 +1,593 @@
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: #131c2e;
+    --card-inner: #0f172a;
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --accent: #f59e0b;
+    --text-color: #f3f4f6;
+    --text-muted: #9ca3af;
+    --ball-bg: #2563eb;
+    --star-bg: #eab308;
+    --border-color: #1f293d;
+    --green-bg: #059669;
+    --red-bg: #dc2626;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 14px;
+}
+
+/* Header App */
+.hero {
+    background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #1e1b4b 100%);
+    padding: 28px 15px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
+}
+
+.logo-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.logo-title i, .logo-title span {
+    color: var(--accent);
+}
+
+.hero-subtitle {
+    color: #ddd6fe;
+    margin-top: 6px;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    flex: 1;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card h2 {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+}
+
+.card h2 i {
+    color: var(--accent);
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Generador */
+.generator-hero {
+    background: linear-gradient(145deg, #131c2e 0%, #1a103c 100%);
+    border: 2px solid var(--primary);
+}
+
+.generator-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    background: var(--card-inner);
+    padding: 5px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 12px 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 44px;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.manual-build-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--card-inner);
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.manual-inputs-group, .manual-stars-group {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ticket-display-large {
+    background: var(--card-inner);
+    border-radius: 14px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border: 2px dashed var(--border-color);
+    margin: 15px 0;
+}
+
+.panel-instruction {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+/* Bolas Grandes */
+.numbers-row, .stars-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ball, .star {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.4);
+}
+
+.ball {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+    background: radial-gradient(circle at 30% 30%, #60a5fa, var(--ball-bg));
+    color: white;
+}
+
+.star {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+    background: radial-gradient(circle at 30% 30%, #fde047, var(--star-bg));
+    color: #0f172a;
+    border-radius: 30%;
+}
+
+.ball.placeholder, .star.placeholder {
+    width: 42px;
+    height: 42px;
+    background: #1f293d;
+    color: var(--text-muted);
+    font-size: 1rem;
+    box-shadow: none;
+}
+
+/* Bolas Pequeñas Compactas (Corrección de apilamiento vertical) */
+.mini-balls-row, .saved-numbers {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    align-items: center;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 2px;
+}
+
+.ball-sm, .star-sm {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+    box-shadow: inset 0 -2px 3px rgba(0,0,0,0.4);
+}
+.ball-sm { background: var(--ball-bg); color: #fff; }
+.star-sm { background: var(--star-bg); color: #0f172a; border-radius: 30%; }
+
+/* Botones y Formulario App */
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.full-btn {
+    width: 100%;
+}
+
+.glow-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    font-family: 'Fredoka', cursive;
+    font-size: 1.15rem;
+    padding: 14px;
+    box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45);
+}
+
+.secondary {
+    background-color: #334155;
+}
+.secondary:hover {
+    background-color: #475569;
+}
+
+/* Inputs y Selects */
+input[type="number"], input[type="text"], input[type="date"], .app-select {
+    background: var(--card-inner);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 12px;
+    width: 100%;
+    min-height: 44px;
+}
+
+input[type="number"]:focus, input[type="text"]:focus, select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.custom-num, .custom-star, .f-num, .f-star {
+    width: 44px !important;
+    height: 44px !important;
+    text-align: center;
+    padding: 0 !important;
+}
+
+/* Formulario de Contabilidad App */
+.finance-card-builder {
+    background: var(--card-inner);
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+}
+
+.form-row-app {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label, .cost-preset-section label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.cost-preset-section {
+    margin-top: 12px;
+}
+
+.preset-buttons-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.cost-btn {
+    flex: 1;
+    min-width: 100px;
+    background: #1e293b;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 10px 8px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.cost-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.highlight-input {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Resumen Financiero */
+.finance-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: var(--card-inner);
+    padding: 12px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.stat-highlight {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.spent-color { color: #f87171; }
+.won-color { color: #34d399; }
+
+/* Lista de Registros Financieros (Estilo App Cards) */
+.records-header {
+    margin-top: 22px;
+    margin-bottom: 10px;
+}
+
+.records-header h3 {
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+.records-app-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.record-card-item {
+    background: var(--card-inner);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.record-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 6px;
+}
+
+.record-date {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.record-bet-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    word-break: break-word;
+}
+
+.record-stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.record-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.badge-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+.badge-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+/* Amuleto Fijo e Histórico */
+.fixed-inputs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--card-inner);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    justify-content: center;
+}
+
+.input-group-mini label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.inputs-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-inner);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.history-table th, .history-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.history-table th {
+    background-color: #2e1065;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Guardados */
+.saved-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.saved-item {
+    background: var(--card-inner);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    gap: 8px;
+}
+
+.section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.json-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.json-btn {
+    background-color: #334155;
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    min-height: 36px;
+}
+
+.stats-box {
+    background: var(--card-inner);
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    line-height: 1.5;
+}
+
+.empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 12px;
+    font-size: 0.85rem;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 15px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 25px;
+    background: #070911;
+}
